@@ -9,7 +9,6 @@ struct Part{
     pos: HashSet<(i64,i64)>
 }
 
-
 // thank you "Uncle Scientist"!
 // https://www.youtube.com/watch?v=QMcfEVVrJlk&t=1415s
 
@@ -39,9 +38,8 @@ fn main() {
     for (y,line) in stream.lines().enumerate(){
         for (x,char) in line.chars().enumerate(){
 
-            // println!("{} {}",x,y);
-            let xx = x as i64;
-            let yy = y as i64;
+            let x_ = x as i64;
+            let y_ = y as i64;
 
             if char.is_ascii_digit(){
                 is_digit = true;
@@ -52,20 +50,20 @@ fn main() {
                 // . . .
 
                 let pos:HashSet<(i64,i64)> = HashSet::from([
-                    (xx-1 ,yy+1 ), //left 
-                    (xx-1 ,yy ),   //left 
-                    (xx-1 ,yy-1 ), //left 
-                    (xx ,yy+1 ),   // top
-                    (xx ,yy-1 ),   // bottom
-                    (xx+1 ,yy+1 ), // right
-                    (xx+1 ,yy ),   // right
-                    (xx+1 ,yy-1 ) // right
+                    (x_-1 ,y_+1), // left 
+                    (x_-1 ,y_  ), // left 
+                    (x_-1 ,y_-1), // left 
+                    (x_   ,y_+1), // top
+                    (x_   ,y_-1), // bottom
+                    (x_+1 ,y_+1), // right
+                    (x_+1 ,y_  ), // right
+                    (x_+1 ,y_-1)  // right
                 ]); 
                 current_poss.extend(pos);
 
             }else{
                 if char!='.'{
-                    let pos = (xx,yy);
+                    let pos = (x_,y_);
                     symb.insert(pos);
                 }
                 if is_digit {
